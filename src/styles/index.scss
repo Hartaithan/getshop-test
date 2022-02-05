@@ -6,19 +6,18 @@
 }
 
 html,
-body,
-#root {
+body {
   height: 100%;
   width: 100%;
 }
 
-#root {
+body {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.App {
+#root {
   height: 720px;
   width: 1280px;
 }
