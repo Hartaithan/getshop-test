@@ -6,8 +6,8 @@ let lastEditedIndex: number | null = null;
 
 function Form(props: IFormProps) {
   const { form, setForm } = props;
-  const [isComplete, setComplete] = React.useState(false);
-  const keyboard = [
+  const [isComplete, setComplete] = React.useState<boolean>(false);
+  const keyboard: string[] = [
     "1",
     "2",
     "3",
@@ -97,7 +97,7 @@ function Form(props: IFormProps) {
         и с Вами свяжется наш менеждер для дальнейшей консультации
       </p>
       <div className="form__keyboard">
-        {keyboard.map((key) => {
+        {keyboard.map((key: string) => {
           if (key === keyboard[9]) {
             return (
               <button
@@ -120,7 +120,10 @@ function Form(props: IFormProps) {
       <div className="form__checkbox">
         <label className="control control--checkbox">
           Согласие на обработку персональных данных
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            onChange={(e) => setForm({ ...form, checkbox: e.target.checked })}
+          />
           <div className="control__indicator"></div>
         </label>
       </div>
