@@ -3,8 +3,16 @@ import { Link } from "react-router-dom";
 import "./toFormBadge.scss";
 
 function ToFormBadge() {
+  const [pos, setPos] = React.useState(-251);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setPos(0);
+    }, 5000);
+  }, []);
+
   return (
-    <div className="toFormBadge">
+    <div className="toFormBadge" style={{ marginRight: `${pos}px` }}>
       <p className="toFormBadge__title">
         ИСПОЛНИТЕ МЕЧТУ ВАШЕГО МАЛЫША! ПОДАРИТЕ ЕМУ СОБАКУ!
       </p>
