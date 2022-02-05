@@ -1,0 +1,40 @@
+.toFormBadge {
+  position: absolute;
+  right: 0;
+  top: 220px;
+  width: 251px;
+  height: 357px;
+  background: #86d3f4;
+  padding: 20px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  p {
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  &__title {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-transform: uppercase;
+  }
+  &__descr {
+    white-space: pre-wrap;
+  }
+  &__image {
+    margin-bottom: 20px;
+  }
+  &__button {
+    width: 156px;
+    height: 52px;
+    padding: 16px;
+    background: #000000;
+    color: #86d3f4;
+    border: none;
+    cursor: pointer;
+  }
+}
