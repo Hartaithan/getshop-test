@@ -8,13 +8,15 @@ export interface IFormProps {
   setForm: React.Dispatch<React.SetStateAction<IFormState>>;
 }
 
-export interface IError {
-  code: number;
-  type: string;
-  info: string;
-}
-
 export interface IErrorResponse {
-  success: boolean;
-  error: IError;
+  carrier: string;
+  country_code: string;
+  country_name: string;
+  country_prefix: string;
+  international_format: string;
+  line_type: string | null;
+  local_format: string;
+  location: string;
+  number: string;
+  valid: boolean;
 }
