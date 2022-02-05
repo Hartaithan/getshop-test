@@ -1,0 +1,13 @@
+.formPage {
+  position: relative;
+  &__quit {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 88px;
+    height: 52px;
+    border: 2px solid #000000;
+    background: #ffffff;
+    cursor: pointer;
+  }
+}

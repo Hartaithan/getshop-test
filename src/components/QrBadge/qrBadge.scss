@@ -1,0 +1,21 @@
+.qrBadge {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  display: flex;
+  align-items: center;
+  p {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #ffffff;
+    white-space: pre-wrap;
+    text-align: end;
+    text-transform: uppercase;
+  }
+  &__image {
+    height: 100px;
+    width: 100px;
+    margin-left: 10px;
+  }
+}

@@ -22,6 +22,12 @@ body {
   width: 1280px;
 }
 
+p {
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+}
+
 @font-face {
   font-family: "Roboto";
   src: url("../fonts/Roboto-Light.ttf") format("truetype");
