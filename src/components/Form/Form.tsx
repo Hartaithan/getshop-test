@@ -22,12 +22,12 @@ function Form(props: IFormProps) {
   ];
 
   React.useEffect(() => {
-    if (!form.number.includes("_")) {
+    if (!form.number.includes("_") && form.checkbox) {
       setComplete(true);
     } else {
       setComplete(false);
     }
-  }, [form.number]);
+  }, [form]);
 
   function setNumber(event: any) {
     if (form.number.includes("_")) {
