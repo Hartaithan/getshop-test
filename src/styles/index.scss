@@ -18,6 +18,7 @@ body {
 }
 
 #root {
+  position: relative;
   height: 720px;
   width: 1280px;
 }
@@ -26,6 +27,14 @@ p {
   font-size: 14px;
   line-height: 16px;
   text-align: center;
+}
+
+video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  pointer-events: none;
 }
 
 @font-face {

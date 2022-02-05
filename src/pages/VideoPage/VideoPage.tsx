@@ -6,9 +6,6 @@ function VideoPage() {
   return (
     <div className="videoPage">
       <ToFormBadge />
-      <video autoPlay muted controls={false} loop>
-        <source src="./video.mp4" type="video/mp4" />
-      </video>
     </div>
   );
 }

@@ -27,7 +27,7 @@ function Slider() {
         style={{ transform: `translateX(${pos}px)` }}
       >
         {images.map((img) => (
-          <img src={img} alt="slide" />
+          <img src={img} key={img} alt="slide" />
         ))}
       </div>
       <div className="slider__arrows">
