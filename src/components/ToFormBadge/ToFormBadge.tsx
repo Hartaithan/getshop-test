@@ -1,15 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { IToFormBadgeProps } from "../../models/ToFormBadgeModel";
 import "./toFormBadge.scss";
 
-function ToFormBadge() {
+function ToFormBadge(props: IToFormBadgeProps) {
+  const { videoCurrentTime } = props;
   const [pos, setPos] = React.useState(-251);
 
   React.useEffect(() => {
-    setTimeout(() => {
+    if (videoCurrentTime && videoCurrentTime > 5) {
       setPos(0);
-    }, 5000);
-  }, []);
+    }
+  }, [videoCurrentTime]);
 
   return (
     <div className="toFormBadge" style={{ marginRight: `${pos}px` }}>

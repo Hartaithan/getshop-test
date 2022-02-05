@@ -1,11 +1,13 @@
 import React from "react";
 import ToFormBadge from "../../components/ToFormBadge/ToFormBadge";
+import { IVideoPageProps } from "../../models/VideoPageModel";
 import "./videoPage.scss";
 
-function VideoPage() {
+function VideoPage(props: IVideoPageProps) {
+  const { videoCurrentTime } = props;
   return (
     <div className="videoPage">
-      <ToFormBadge />
+      <ToFormBadge videoCurrentTime={videoCurrentTime} />
     </div>
   );
 }
