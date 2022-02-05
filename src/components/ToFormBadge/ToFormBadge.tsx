@@ -11,7 +11,9 @@ function ToFormBadge() {
       <img className="toFormBadge__image" src="./qr.png" alt="qr code" />
       <p className="toFormBadge__descr">{`Сканируйте QR-код\nили нажмите ОК`}</p>
       <Link to="/form">
-        <button className="toFormBadge__button">ОК</button>
+        <button className="toFormBadge__button" type="button">
+          ОК
+        </button>
       </Link>
     </div>
   );

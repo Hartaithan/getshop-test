@@ -7,15 +7,16 @@ import "./formPage.scss";
 
 function FormPage() {
   const [form, setForm] = React.useState<IFormState>({
-    number: "",
+    number: ["_", "_", "_", "_", "_", "_", "_", "_", "_", "_"],
+    checkbox: false,
   });
   return (
     <div className="formPage">
-      <Form />
+      <Form form={form} setForm={setForm} />
       <img src="./formBg.png" alt="form background" />
       <QrBadge />
       <Link to="/">
-        <button className="formPage__quit">
+        <button className="formPage__quit" type="button">
           <svg
             width="24"
             height="24"
@@ -29,7 +30,7 @@ function FormPage() {
               x2="22.6264"
               y2="22.2223"
               stroke="black"
-              stroke-width="3"
+              strokeWidth="3"
             />
             <line
               x1="1.6576"
@@ -37,7 +38,7 @@ function FormPage() {
               x2="21.9392"
               y2="1.94067"
               stroke="black"
-              stroke-width="3"
+              strokeWidth="3"
             />
           </svg>
         </button>
