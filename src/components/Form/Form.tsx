@@ -6,6 +6,7 @@ let lastEditedIndex: number | null = null;
 
 function Form(props: IFormProps) {
   const { form, setForm } = props;
+  const [isComplete, setComplete] = React.useState(false);
   const keyboard = [
     "1",
     "2",
@@ -19,6 +20,14 @@ function Form(props: IFormProps) {
     "СТЕРЕТЬ",
     "0",
   ];
+
+  React.useEffect(() => {
+    if (!form.number.includes("_")) {
+      setComplete(true);
+    } else {
+      setComplete(false);
+    }
+  }, [form.number]);
 
   function setNumber(event: any) {
     if (form.number.includes("_")) {
@@ -115,7 +124,7 @@ function Form(props: IFormProps) {
           <div className="control__indicator"></div>
         </label>
       </div>
-      <button className="form__submit" type="submit">
+      <button className="form__submit" type="submit" disabled={!isComplete}>
         Подтвердить номер
       </button>
     </form>
