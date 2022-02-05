@@ -1,5 +1,6 @@
 import React from "react";
-import { IFormProps } from "../../models/FormModel";
+import { IErrorResponse, IFormProps } from "../../models/FormModel";
+import { useNavigate } from "react-router-dom";
 import "./form.scss";
 
 let lastEditedIndex: number | null = null;
@@ -7,6 +8,9 @@ let lastEditedIndex: number | null = null;
 function Form(props: IFormProps) {
   const { form, setForm } = props;
   const [isComplete, setComplete] = React.useState<boolean>(false);
+  const [errors, setErrors] = React.useState<IErrorResponse | null>(null);
+  let navigate = useNavigate();
+  const apiKey = process.env.REACT_APP_NUMVERIFY_KEY;
   const keyboard: string[] = [
     "1",
     "2",
@@ -29,7 +33,14 @@ function Form(props: IFormProps) {
     }
   }, [form]);
 
+  function clearErrors() {
+    if (errors) {
+      setErrors(null);
+    }
+  }
+
   function setNumber(event: any) {
+    clearErrors();
     if (form.number.includes("_")) {
       const number = event.target.outerText;
       const numbers = [...form.number];
@@ -41,6 +52,7 @@ function Form(props: IFormProps) {
   }
 
   function clear() {
+    clearErrors();
     if (lastEditedIndex !== null) {
       const numbers = [...form.number];
       numbers[lastEditedIndex] = "_";
@@ -53,10 +65,28 @@ function Form(props: IFormProps) {
     }
   }
 
+  function handleSubmit() {
+    const cleanedNumber = form.number.join("");
+    const url = `http://apilayer.net/api/validate?access_key=${apiKey}&number=${cleanedNumber}&country_code=RU`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.valid) {
+          navigate("./final");
+        } else {
+          setErrors(data);
+          console.error("invalid number", data);
+          setComplete(false);
+        }
+      });
+  }
+
   return (
     <form className="form">
       <p className="form__title">Введите ваш номер мобильного телефона</p>
-      <div className="form__customInput">
+      <div
+        className={errors ? "form__customInput invalid" : "form__customInput"}
+      >
         {form.number.map((char: string, index: number) => {
           if (index === 0) {
             return (
@@ -117,17 +147,26 @@ function Form(props: IFormProps) {
           );
         })}
       </div>
-      <div className="form__checkbox">
-        <label className="control control--checkbox">
-          Согласие на обработку персональных данных
-          <input
-            type="checkbox"
-            onChange={(e) => setForm({ ...form, checkbox: e.target.checked })}
-          />
-          <div className="control__indicator"></div>
-        </label>
+      <div className={errors ? "form__checkbox invalid" : "form__checkbox"}>
+        {errors ? (
+          <p>Неверно введён номер</p>
+        ) : (
+          <label className="control control--checkbox">
+            Согласие на обработку персональных данных
+            <input
+              type="checkbox"
+              onChange={(e) => setForm({ ...form, checkbox: e.target.checked })}
+            />
+            <div className="control__indicator"></div>
+          </label>
+        )}
       </div>
-      <button className="form__submit" type="submit" disabled={!isComplete}>
+      <button
+        className="form__submit"
+        type="button"
+        onClick={() => handleSubmit()}
+        disabled={!isComplete}
+      >
         Подтвердить номер
       </button>
     </form>

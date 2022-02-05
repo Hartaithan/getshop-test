@@ -27,6 +27,11 @@
       font-size: 32px;
       line-height: 37px;
     }
+    &.invalid {
+      p {
+        color: #ea0000;
+      }
+    }
   }
   &__input {
     border: none;
@@ -72,6 +77,21 @@
   }
   &__checkbox {
     margin-bottom: 20px;
+    &.invalid {
+      margin-bottom: 13px;
+    }
+    p {
+      width: 284px;
+      height: 52px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #ea0000;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 19px;
+      text-transform: uppercase;
+    }
     .control {
       height: 40px;
       display: flex;
