@@ -1,0 +1,13 @@
+.finalPage {
+  position: relative;
+  &__quit {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 88px;
+    height: 52px;
+    border: none;
+    background: #000000;
+    cursor: pointer;
+  }
+}

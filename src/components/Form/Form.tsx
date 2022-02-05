@@ -72,7 +72,7 @@ function Form(props: IFormProps) {
       .then((response) => response.json())
       .then((data) => {
         if (data.valid) {
-          navigate("./final");
+          navigate("/final");
         } else {
           setErrors(data);
           console.error("invalid number", data);
