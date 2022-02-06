@@ -170,7 +170,7 @@ function Form(props: IFormProps) {
 
   function handleSubmit() {
     const cleanedNumber = form.number.join("");
-    const url = `http://apilayer.net/api/validate?access_key=${apiKey}&number=${cleanedNumber}&country_code=RU`;
+    const url = `https://apilayer.net/api/validate?access_key=${apiKey}&number=${cleanedNumber}&country_code=RU`;
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
