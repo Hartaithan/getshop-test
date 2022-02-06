@@ -17,7 +17,14 @@ function App() {
 
   function playVideo() {
     if (videoRef.current) {
-      videoRef.current.play();
+      videoRef.current.volume = 0.05;
+      var promise = videoRef.current.play();
+      if (promise !== undefined) {
+        promise.catch(() => {
+          videoRef.current!.muted = true;
+          videoRef.current!.play();
+        });
+      }
     }
   }
 
@@ -41,7 +48,6 @@ function App() {
       </Routes>
       <video
         autoPlay
-        muted
         controls={false}
         loop
         ref={videoRef}
