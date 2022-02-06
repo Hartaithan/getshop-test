@@ -3,6 +3,7 @@ import { IErrorResponse, IFormProps } from "../../models/FormModel";
 import { useNavigate } from "react-router-dom";
 import "./form.scss";
 import keyBindings from "../../keys/keyboardBindings";
+import { IKeyObject } from "../../models/ToFormBadgeModel";
 
 let lastEditedIndex: number | null = null;
 
@@ -13,7 +14,7 @@ function Form(props: IFormProps) {
   const activeRef = React.useRef<any>(null);
   let navigate = useNavigate();
   const apiKey = process.env.REACT_APP_NUMVERIFY_KEY;
-  const keyboard: any = [
+  const keyboard: IKeyObject[] = [
     { key: "1", pos: "00" },
     { key: "2", pos: "10" },
     { key: "3", pos: "20" },
@@ -80,7 +81,8 @@ function Form(props: IFormProps) {
         break;
     }
     let posString = xy.join("");
-    const nextEl: any = document.querySelector(`[data-pos="${posString}"]`);
+    const nextEl: HTMLButtonElement | HTMLInputElement | null =
+      document.querySelector(`[data-pos="${posString}"]`);
     if (nextEl && !nextEl.disabled) {
       activeRef.current = nextEl;
       activeRef.current.focus();
@@ -189,7 +191,7 @@ function Form(props: IFormProps) {
         и с Вами свяжется наш менеждер для дальнейшей консультации
       </p>
       <div className="form__keyboard">
-        {keyboard.map((key: any) => {
+        {keyboard.map((key: IKeyObject) => {
           if (key === keyboard[0]) {
             return (
               <button
