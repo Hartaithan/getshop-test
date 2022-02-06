@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Form from "../../components/Form/Form";
 import QrBadge from "../../components/QrBadge/QrBadge";
+import keyBindings from "../../keys/keyboardBindings";
 import { IFormState } from "../../models/FormModel";
 import "./formPage.scss";
 
@@ -10,6 +11,16 @@ function FormPage() {
     number: ["_", "_", "_", "_", "_", "_", "_", "_", "_", "_"],
     checkbox: false,
   });
+  let navigate = useNavigate();
+
+  React.useEffect(() => {
+    window.addEventListener("keydown", (e) => {
+      if (e.keyCode === keyBindings.KEY_BACK) {
+        navigate("/");
+      }
+    });
+  }, []); // eslint-disable-line
+
   return (
     <div className="formPage">
       <Form form={form} setForm={setForm} />

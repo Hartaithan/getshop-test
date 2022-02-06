@@ -1,17 +1,27 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import keyBindings from "../../keys/keyboardBindings";
 import { IToFormBadgeProps } from "../../models/ToFormBadgeModel";
 import "./toFormBadge.scss";
 
 function ToFormBadge(props: IToFormBadgeProps) {
   const { videoCurrentTime } = props;
   const [pos, setPos] = React.useState(-251);
+  let navigate = useNavigate();
 
   React.useEffect(() => {
     if (videoCurrentTime && videoCurrentTime > 5) {
       setPos(0);
     }
   }, [videoCurrentTime]);
+
+  React.useEffect(() => {
+    window.addEventListener("keydown", (e) => {
+      if (e.keyCode === keyBindings.KEY_OK && pos === 0) {
+        navigate("/form");
+      }
+    });
+  }, [pos]); // eslint-disable-line
 
   return (
     <div className="toFormBadge" style={{ marginRight: `${pos}px` }}>
