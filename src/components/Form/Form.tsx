@@ -81,7 +81,6 @@ function Form(props: IFormProps) {
     }
     let posString = xy.join("");
     const nextEl: any = document.querySelector(`[data-pos="${posString}"]`);
-    console.log(nextEl);
     if (nextEl && !nextEl.disabled) {
       activeRef.current = nextEl;
       activeRef.current.focus();

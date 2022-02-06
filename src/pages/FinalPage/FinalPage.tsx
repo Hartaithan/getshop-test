@@ -1,12 +1,55 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Slider from "../../components/Slider/Slider";
+import keyBindings from "../../keys/keyboardBindings";
 import "./finalPage.scss";
 
+const step = 1280;
+
 function FinalPage() {
+  let navigate = useNavigate();
+  const [pos, setPos] = React.useState(0);
+  const images = ["./slides/1.png", "./slides/2.png", "./slides/3.png"];
+
+  React.useEffect(() => {
+    window.addEventListener("keydown", (e) => {
+      switch (e.keyCode) {
+        case keyBindings.KEY_LEFT:
+          prevSlide();
+          break;
+        case keyBindings.KEY_RIGHT:
+          nextSlide();
+          break;
+        case keyBindings.KEY_BACK:
+          navigate("/form");
+          break;
+        default:
+          break;
+      }
+    });
+  }, [pos]); // eslint-disable-line
+
+  function prevSlide() {
+    if (pos < 0) {
+      setPos(pos + step);
+    }
+  }
+
+  function nextSlide() {
+    const condition = -((images.length - 1) * step);
+    if (pos > condition) {
+      setPos(pos - step);
+    }
+  }
+
   return (
     <div className="finalPage">
-      <Slider />
+      <Slider
+        pos={pos}
+        images={images}
+        prevSlide={prevSlide}
+        nextSlide={nextSlide}
+      />
       <Link to="/form">
         <button className="finalPage__quit" type="button">
           <svg

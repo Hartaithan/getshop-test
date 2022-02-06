@@ -1,25 +1,9 @@
 import React from "react";
+import { ISliderProps } from "../../models/SliderModel";
 import "./slider.scss";
 
-const step = 1280;
-
-function Slider() {
-  const images = ["./slides/1.png", "./slides/2.png", "./slides/3.png"];
-  const [pos, setPos] = React.useState(0);
-
-  function prevSlide() {
-    if (pos < 0) {
-      setPos(pos + step);
-    }
-  }
-
-  function nextSlide() {
-    const condition = -((images.length - 1) * step);
-    if (pos > condition) {
-      setPos(pos - step);
-    }
-  }
-
+function Slider(props: ISliderProps) {
+  const { pos, images, prevSlide, nextSlide } = props;
   return (
     <div className="slider">
       <div
