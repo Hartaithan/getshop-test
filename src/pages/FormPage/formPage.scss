@@ -9,5 +9,15 @@
     border: 2px solid #000000;
     background: #ffffff;
     cursor: pointer;
+    outline: none;
+    &:hover,
+    &:focus {
+      border: 2px solid #ffffff;
+      background: #000000;
+      color: #000000;
+      line {
+        stroke: #ffffff;
+      }
+    }
   }
 }

@@ -60,20 +60,29 @@ function Form(props: IFormProps) {
           xy = ["1", "3"];
           break;
         }
+        if (pos === "13") {
+          xy = ["0", "4"];
+          break;
+        }
         xy[1] = parseInt(xy[1]) + 1;
         break;
       case keyBindings.KEY_LEFT:
         xy[0] = parseInt(xy[0]) - 1;
         break;
       case keyBindings.KEY_RIGHT:
+        if (["21", "22", "13", "04", "05"].includes(pos)) {
+          xy = ["3", "0"];
+          break;
+        }
         xy[0] = parseInt(xy[0]) + 1;
         break;
       default:
         break;
     }
     let posString = xy.join("");
-    const nextEl = document.querySelector(`[data-pos="${posString}"]`);
-    if (nextEl) {
+    const nextEl: any = document.querySelector(`[data-pos="${posString}"]`);
+    console.log(nextEl);
+    if (nextEl && !nextEl.disabled) {
       activeRef.current = nextEl;
       activeRef.current.focus();
     }
@@ -130,6 +139,8 @@ function Form(props: IFormProps) {
           console.error("invalid number", data);
           setComplete(false);
         }
+        activeRef.current = document.querySelector(`[data-pos="00"]`);
+        activeRef.current.focus();
       });
   }
 
@@ -228,8 +239,14 @@ function Form(props: IFormProps) {
               type="checkbox"
               checked={form.checkbox}
               onChange={(e) => setForm({ ...form, checkbox: e.target.checked })}
+              onKeyDown={(e) => {
+                if (e.keyCode === keyBindings.KEY_OK) {
+                  setForm({ ...form, checkbox: !form.checkbox });
+                }
+              }}
+              data-pos="04"
             />
-            <div className="control__indicator"></div>
+            <div className="control__indicator" />
           </label>
         )}
       </div>
@@ -238,6 +255,7 @@ function Form(props: IFormProps) {
         type="button"
         onClick={() => handleSubmit()}
         disabled={!isComplete}
+        data-pos="05"
       >
         Подтвердить номер
       </button>

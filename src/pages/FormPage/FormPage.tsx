@@ -27,7 +27,16 @@ function FormPage() {
       <img src="./formBg.png" alt="form background" />
       <QrBadge />
       <Link to="/">
-        <button className="formPage__quit" type="button">
+        <button
+          className="formPage__quit"
+          type="button"
+          data-pos="30"
+          onKeyDown={(e) => {
+            if (e.keyCode === keyBindings.KEY_OK) {
+              navigate("/");
+            }
+          }}
+        >
           <svg
             width="24"
             height="24"

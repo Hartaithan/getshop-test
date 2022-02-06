@@ -65,7 +65,9 @@
       line-height: 19px;
       text-transform: uppercase;
       cursor: pointer;
-      &:hover {
+      outline: none;
+      &:hover,
+      &:focus {
         background: #000000;
         color: #ffffff;
       }
@@ -134,6 +136,9 @@
     .control input:checked ~ .control__indicator:after {
       display: block;
     }
+    .control input:focus ~ .control__indicator {
+      border: 2px solid #ffffff;
+    }
     .control--checkbox .control__indicator:after {
       left: 12px;
       top: 5px;
@@ -154,7 +159,9 @@
     line-height: 19px;
     text-transform: uppercase;
     cursor: pointer;
-    &:hover {
+    outline: none;
+    &:hover,
+    &:focus {
       background: #000000;
       color: #ffffff;
     }
