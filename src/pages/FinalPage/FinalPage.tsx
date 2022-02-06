@@ -11,8 +11,8 @@ function FinalPage() {
   const [pos, setPos] = React.useState(0);
   const images = ["./slides/1.png", "./slides/2.png", "./slides/3.png"];
 
-  React.useEffect(() => {
-    window.addEventListener("keydown", (e) => {
+  const handleKeyDown = React.useCallback(
+    (e) => {
       switch (e.keyCode) {
         case keyBindings.KEY_LEFT:
           prevSlide();
@@ -26,8 +26,16 @@ function FinalPage() {
         default:
           break;
       }
-    });
-  }, [pos]); // eslint-disable-line
+    },
+    [pos] // eslint-disable-line
+  );
+
+  React.useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleKeyDown]); // eslint-disable-line
 
   function prevSlide() {
     if (pos < 0) {

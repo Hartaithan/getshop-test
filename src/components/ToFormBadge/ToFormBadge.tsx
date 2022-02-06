@@ -15,13 +15,21 @@ function ToFormBadge(props: IToFormBadgeProps) {
     }
   }, [videoCurrentTime]);
 
-  React.useEffect(() => {
-    window.addEventListener("keydown", (e) => {
+  const handleKeyDown = React.useCallback(
+    (e) => {
       if (e.keyCode === keyBindings.KEY_OK && pos === 0) {
         navigate("/form");
       }
-    });
-  }, [pos]); // eslint-disable-line
+    },
+    [pos] // eslint-disable-line
+  );
+
+  React.useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleKeyDown]); // eslint-disable-line
 
   return (
     <div className="toFormBadge" style={{ marginRight: `${pos}px` }}>
