@@ -13,7 +13,7 @@ function Form(props: IFormProps) {
   const [errors, setErrors] = React.useState<IErrorResponse | null>(null);
   const activeRef = React.useRef<any>(null);
   let navigate = useNavigate();
-  const apiKey = process.env.REACT_APP_NUMVERIFY_KEY;
+  const apiKey = process.env.REACT_APP_API_KEY;
   const keyboard: IKeyObject[] = [
     { key: "1", pos: "00" },
     { key: "2", pos: "10" },
@@ -170,7 +170,7 @@ function Form(props: IFormProps) {
 
   function handleSubmit() {
     const cleanedNumber = form.number.join("");
-    const url = `https://apilayer.net/api/validate?access_key=${apiKey}&number=${cleanedNumber}&country_code=RU`;
+    const url = `https://phonevalidation.abstractapi.com/v1/?api_key=${apiKey}&phone=7${cleanedNumber}`;
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
