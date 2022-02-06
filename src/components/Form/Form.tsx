@@ -44,6 +44,7 @@ function Form(props: IFormProps) {
     let pos;
     pos = activeRef.current.dataset.pos;
     let xy = pos.split("");
+    console.log(key);
     switch (key) {
       case keyBindings.KEY_UP:
         if (pos === "13") {
@@ -89,15 +90,55 @@ function Form(props: IFormProps) {
     }
   }
 
+  const handleKeyDown = React.useCallback(
+    (e) => {
+      if (
+        [
+          keyBindings.KEY_UP,
+          keyBindings.KEY_DOWN,
+          keyBindings.KEY_LEFT,
+          keyBindings.KEY_RIGHT,
+        ].includes(e.keyCode)
+      ) {
+        nextElement(e.keyCode);
+      }
+      if (
+        e.keyCode >= keyBindings.NUMKEY_0 &&
+        e.keyCode <= keyBindings.NUMKEY_9
+      ) {
+        setNumberFromNumpad(e);
+      }
+      if (e.keyCode >= keyBindings.KEY_0 && e.keyCode <= keyBindings.KEY_9) {
+        setNumberFromNumpad(e);
+      }
+      if (e.keyCode === keyBindings.KEY_BACK) {
+        clear();
+      }
+    },
+    [form.number] // eslint-disable-line
+  );
+
   React.useEffect(() => {
-    window.addEventListener("keydown", (e) => {
-      nextElement(e.keyCode);
-    });
-  }, []); // eslint-disable-line
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleKeyDown]);
 
   function clearErrors() {
     if (errors) {
       setErrors(null);
+    }
+  }
+
+  function setNumberFromNumpad({ key }: any) {
+    clearErrors();
+    if (form.number.includes("_")) {
+      const numbers = [...form.number];
+      let index = numbers.findIndex((x) => x === "_");
+      lastEditedIndex = index;
+      numbers[index] = key;
+      setForm({ ...form, number: numbers });
     }
   }
 

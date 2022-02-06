@@ -13,14 +13,6 @@ function FormPage() {
   });
   let navigate = useNavigate();
 
-  React.useEffect(() => {
-    window.addEventListener("keydown", (e) => {
-      if (e.keyCode === keyBindings.KEY_BACK) {
-        navigate("/");
-      }
-    });
-  }, []); // eslint-disable-line
-
   return (
     <div className="formPage">
       <Form form={form} setForm={setForm} />
